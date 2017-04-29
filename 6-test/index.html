@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Default</title>
+	<script src="../0-app/framework/angular.js"></script>
+	<script src="../0-app/framework/angular-animate.js"></script>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.page{
+			position: absolute;
+			text-align: center;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+		.hello{
+			background: #00D0BC;
+			color: #ffffff;
+/*			transition:background 1s;*/
+		}
+		@keyframes myChange {
+		    from {
+		        background: #00D0BC;
+		    } to {
+		        background: red;
+		    }
+		}
+		.hello.ng-clcik{
+			animation: 0.5s myChange;
+		}
+		.hello.ng-leave{
+		}
+	</style>
+</head>
+<body>
+	<div ng-controller='divController' class="page {{pageClass}}">
+		<h1>hello angular</h1>
+		<button ng-click='animate()'>animate</button>
+	</div>
+<script>
+	var myAppModule = angular.module('myApp',[]);
+
+	myAppModule.controller('divController',function($scope) {
+		$scope.animate = function(){
+			$scope.pageClass = 'hello';
+		};
+	})
+</script>
+</body>
+</html>

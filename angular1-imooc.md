@@ -1,5 +1,6 @@
 ## angular实战
 
+[ngnice API](http://docs.ngnice.com/api)
 ====================================================
 
 #### 第一部分 快速上手
@@ -392,11 +393,75 @@ BookStore
 
 
 
+路由
+
+* Ajax请求不会留下历史History记录
+* 用户无法直接通过URl进入应用中的指定页面，（保存书签，链接分享给朋友）
+* Ajax对SEO是个灾难
+
+
+多路由嵌套
+
+[angular-ui.github.io](angular-ui.github.io)
+
+这里面的UI-Router可以代替angular-route,提供深层次嵌套
+
+
+期待男路由的基本原理
+
+* 哈希
+* HTML5中新的history API
+* 路由的核心是给应用定义“状态”
+* 使用路由机制会影响应用的整体编码方式（需要预先定义好状态）
+* 考虑兼容性问题与‘优雅降级’
+
 
 ```
 
 
 ##### 2.4 指令
+
+
+* 解析最简单的指令hello:匹配模式restrict
+	* A attribute属性
+		* `<div hello></div>`
+	* E element元素
+		* `<hello></hello>`
+	* M 注释
+		* `<!-- directive:hello -->`
+		* `<div></div>`
+	* C class
+		* `<div class="hello">`
+
+|#|#|#|
+|---|---|---|
+|E|元素|`<my-menu title=Products></my-menu>`|
+|A(默认)|属性|`<div my-menu=Products></div>`|
+|C|样式|`<div class=my-menu:Products></div>`|
+|M|注释|`<!-- directive:my-menu Products -->`|
+|推荐使用元素和属性的方式使用指令|
+|当需要创建带有自己的模板的指令时，使用元素名称的方式创建指令|
+|当需要为已有的HTML标签增加功能时，使用属性的方式创建指令|
+
+* 解析最简单的指令hello：template、templateUrl、$templateCache
+* 解析最简单的指令hello：replace与transclude
+* comild与link（操作元元素，添加css样式，绑定事件）
+* 指令与控制器之间的交互
+* 指令间的交互
+* scope的类型与独立scope
+* scope的绑定策略
+* angularJS内置指令
+* 实例解析Expander
+* 实例解析Accordion
+* 指令的运行原理：compile和link
+* 总结：ERP类型的系统必备的UI组件
+* 总结：互联网/电商型系统必备的UI组件
+* 第三方指令库angular-ui
+* Directive思想的起源和原理
+
+```
+解析最简单的指令hello -- 8-app
+```
 ##### 2.5 Service
 ##### 2.6 Provider
 ##### 2.7 表单
@@ -423,5 +488,8 @@ BookStore
 ====================================================
 
 #### 版本使用v1.3.0-beta.10
+#### 自己写的代码是v1.3.0最终的版本要区别对待,
 #### 不支持IE8
 #### 23种设计模式
+
+http://www.imooc.com/video/2949 03:59

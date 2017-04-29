@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyCSSModule">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Form</title>
+</head>
+<body>
+	<div ng-controller="DeathrayMenuController">
+		<button ng-click='toggleMenu()'>Toggle Menu</button>
+		<ul ng-show='menuState.show'>
+			<li ng-click='stun()'>stun</li>
+			<li ng-click='disintegrate()'>Disintegrate</li>
+			<li ng-click='erase()'>Erase from history</li>
+		</ul>
+	</div>
+	<script src="https://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+	<script>
+	var myCSSModule = angular.module('MyCSSModule',[]);
+	myCSSModule.controller('DeathrayMenuController',function($scope) {
+		$scope.menuState = {show:false};
+		$scope.toggleMenu = function() {
+			$scope.menuState.show = !$scope.menuState.show;
+		}
+	})
+	</script>
+</body>
+</html>

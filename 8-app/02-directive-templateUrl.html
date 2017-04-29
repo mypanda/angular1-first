@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<hello></hello>
+	<div class="hello"></div>
+	<div hello></div>
+	<!-- directive:hello -->
+	<div></div>
+	<script>
+	angular.module('directive',[])
+	.directive('hello',function(){
+		return {
+			restrict:'AEMC',
+			templateUrl:'02-directive-templateUrl-hello.html',
+			replace:true
+		}
+	})
+	</script>
+</body>
+</html>

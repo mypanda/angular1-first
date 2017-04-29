@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server "
+    "start": "npm run open && npm run server",
+    "server":"node node_modules/http-server/bin/http-server",
+    "open":"node index"
   },
   "keywords": [],
   "author": "",
