@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyCSSModule">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Form</title>
+	<style>
+		.error{
+			background-color: red;
+		}
+		.waring{
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div ng-controller="HeaderCtrl">
+		<div ng-clsss='{err:isError,waring:isWaring}'>{{messageText}}</div>
+		<button ng-click='showError()'>Simulate Error</button>
+		<button ng-click='showWaring()'>Simulate Waring</button>
+	</div>
+	<script src="https://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+	<script>
+	var myCSSModule = angular.module('MyCSSModule',[]);
+	myCSSModule.controller('HeaderCtrl',function($scope) {
+		$scope.isError = false;
+		$scope.isWaring = false;
+		$scope.showError = function() {
+			$scope.messageText = 'This is an error!';
+			$scope.isError = true;
+			$scope.isWaring = false;
+		}
+		$scope.showWaring = function() {
+			$scope.messageText = 'Just a waring .Please carry on.';
+			$scope.isError = false;
+			$scope.isWaring = true;
+		}
+	})
+	</script>
+</body>
+</html>

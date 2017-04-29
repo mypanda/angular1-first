@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyCSSModule">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Form</title>
+	<style>
+		.text-red{
+			background-color: red;
+		}
+		.text-green{
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div ng-controller="CSSCtrl">
+		<p class="text-{{color}}">测试css样式</p>
+		<button class="btn btn-primary" ng-click='setGreen()'>绿色</button>
+	</div>
+	<script src="https://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+	<script>
+	var myCSSModule = angular.module('MyCSSModule',[]);
+	myCSSModule.controller('CSSCtrl',function($scope) {
+		$scope.color = 'red';
+		$scope.setGreen = function() {
+			$scope.color = 'green'
+		}
+	})
+	</script>
+</body>
+</html>
