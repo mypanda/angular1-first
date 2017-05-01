@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<hello></hello>
+	<hello></hello>
+	<hello></hello>
+	<hello></hello>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.directive('hello',function(){
+		return {
+			scope:{},
+			restrict:'AE',
+			template:'<div><input type="text" ng-model="userName" />{{userName}}</div>'
+		}
+	});
+	</script>
+</body>
+</html>

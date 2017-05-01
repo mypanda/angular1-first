@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-controller='myCtl'>
+		<loader howToload="loadData()">滑动加载</loader>
+	</div>
+	<div ng-controller='myCtl2'>
+		<loader howToload="loadData2()">滑动加载</loader>
+	</div>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.controller('myCtl',function($scope) {
+		$scope.loadData = function() {
+			console.log('数据加载中。。。1')
+		}
+	});
+	myDirective.controller('myCtl2',function($scope) {
+		$scope.loadData2 = function() {
+			console.log('数据加载中。。。2')
+		}
+	});
+	myDirective.directive('loader',function($templateCache){
+		return {
+			restrict:'AE',
+			link:function(scope,element,attrs) {
+				element.bind('mouseenter',function(event) {
+					//1调用
+					// scope.loadData();
+					//2嗲用
+					// scope.$apply('loadData()');
+
+					// 两个控制器，自定义一个属性，把加载数据的函数传进来
+					//页面驼峰。这里是小写
+					scope.$apply(attrs.howtoload);
+				})
+			}
+		}
+	})
+	</script>
+</body>
+</html>

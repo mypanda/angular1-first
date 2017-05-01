@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myCtrl">
+		<greeting greet="sayHello(name)"></greeting>
+		<greeting greet="sayHello(name)"></greeting>
+		<greeting greet="sayHello(name)"></greeting>
+		<greeting greet="sayHello(name)"></greeting>
+	</div>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.controller('myCtrl',function($scope) {
+		$scope.sayHello = function (name) {
+			alert('Hello '+name);
+		}
+	});
+	myDirective.directive('greeting',function(){
+		return {
+			restrict:'AE',
+			scope:{
+				greet:"&"
+			},
+			template:'<input type="text" ng-model="userName" />'+'<button class="btn btn-primary" ng-click="greet({name:userName})">sayHello</button><br />'
+		}
+	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+	<style>
+		.text{
+			-webkit-transition:all linear 0.5s;
+			transition:all linear 0.5s;
+			background: transparent;
+		}
+		.text.ng-invalid{
+			box-shadow:0 0 10px 0 red;
+		}
+	</style>
+</head>
+<body>
+	<form name="myForm" ng-submit="save()" ng-controller="myCtrl">
+		<input type="text" name="userName" ng-model="user.username" class="text" required>
+		<input type="password" name="password" ng-model="user.password" class="text" required="">
+		<input type="submit" ng-disabled="myForm.$invalid">
+	</form>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.controller('myCtrl',function($scope) {
+		$scope.user={
+			username:'panda',
+			password:''
+		};
+		$scope.save = function() {
+			alert('保存数据')
+		}
+	});
+	</script>
+</body>
+</html>

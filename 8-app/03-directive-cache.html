@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<hello></hello>
+	<div class="hello"></div>
+	<div hello></div>
+	<!-- directive:hello -->
+	<div></div>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	//注射器加载完所有的模块时，此方法执行一次
+	myDirective.run(function($templateCache) {
+		$templateCache.put('03-directive-templateUrl-hello.html',"<div>hello everyone!!!!</div>");
+	});
+	myDirective.directive('hello',function($templateCache){
+		return {
+			restrict:'AEMC',
+			template:$templateCache.get('03-directive-templateUrl-hello.html'),
+			replace:true
+		}
+	})
+	</script>
+</body>
+</html>

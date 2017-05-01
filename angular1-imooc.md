@@ -459,8 +459,101 @@ BookStore
 * 第三方指令库angular-ui
 * Directive思想的起源和原理
 
+
 ```
-解析最简单的指令hello -- 8-app
+--------------------
+template
+templateUrl
+$templateCache
+replace
+transclude
+
+在第八个app
+
+
+
+------------------
+compile与link
+
+* 加载阶段
+
+加载angular.js 找到ng-app指令，确定应用的边界
+
+* 编译阶段
+
+遍历DOM，找到所有指令
+根据指令代码中的template、replace、transclude转换DOM结构
+如果存在compile函数则调用(compile是directive返回的方法，默认的会被覆盖，尽量不写)
+
+
+* 链接阶段
+
+对每一条指令运行link函数
+link函数一般用来操作DOM，绑定事件监听器link是directive返回的方法）
+
+
+-------------------------
+
+指令与控制器之间的交互
+
+link函数四个参数(scope,element,attr,parentCtrl)
+
+-----------------------
+
+scope的类型与独立scope
+
+07-01-directive-scope.html
+
+-----------------------
+
+scope的绑定策略
+
+
+|#|#|
+|--|--|
+|@|把当前属性作为字符串传递。你还可以绑定来自外层scope的值，在属性值中超乳{{}}即可|
+|=|与父scope中的属性属性双向绑定|
+|&|传递来自父scope的**函数**，稍后调用|
+
+ 08-01-directive-bind.html
+//把自定义属性上的ctrl数据，传递给directive,然后指令渲染template数据到页面
+
+@ 08-02-directive-bind.html 字符串
+//把自定义属性上的ctrl数据，传递给directive,然后指令渲染template数据到页面。传递的字符串`<drink flavor={{ctrlFlavor}}></drink>`
+
+= 08-03-directive-bind.html 双向绑定
+//把自定义属性上的ctrl数据，传递给directive,然后指令渲染template数据到页面。如果指令的数据变化，ctrl的数据也变化，用= `<drink flavor='ctrlFlavor'></drink>`
+
+
+& 08-04-directive-bind.html 传递函数
+//在div中绑定一个Controller，这个Controller中定义了一个sayHello的方法，在div中又定义了一个名为greeting的指令，这个指令的greet方法与父层scope的sayHello相互关联，然后我们在Controller中让greeting指令中的scope定义好greet，这样，父scope中的函数就传递到了子scope中
+
+
+
+
+
+
+
+
+
+angularJS内置指令 63个内置指令
+http://docs.ngnice.com/api/ng/directive
+
+form
+>Angular分装之后的form可以嵌套
+>angular为form扩展了自动校验，防止重复提交
+>angular对input元素的type惊醒了扩展，一共提供10个类型
+text、number、url、email、radio、checkbox、hidden、button、submit、reset
+>angular为表单内置了4中css样式
+ng-valid、ng-invalid、ng-pristine、ng-dirty
+>内置校验器：require、minlength、maxlength
+
+
+
+
+div模拟输入
+
+10-01-
 ```
 ##### 2.5 Service
 ##### 2.6 Provider
@@ -492,4 +585,4 @@ BookStore
 #### 不支持IE8
 #### 23种设计模式
 
-http://www.imooc.com/video/2949 03:59
+http://www.imooc.com/video/3096 05:59

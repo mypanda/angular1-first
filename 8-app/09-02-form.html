@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+	<style>
+		.text{
+			-webkit-transition:all linear 0.5s;
+			transition:all linear 0.5s;
+			background: transparent;
+		}
+		.text.ng-invalid{
+			box-shadow:0 0 10px 0 red;
+		}
+	</style>
+</head>
+<body>
+	<p>这个例子的api，认真看一下</p>
+	<div ng-controller="myCtrl">
+		<form name="form" ng-submit="save()">
+			<label>name:</label>
+			<input type="text" name="user.name" ng-model="uName" class="text" required><br>
+			<label>E-mail</label>
+			<input type="email" name="user.email" ng-model="uEmail" class="text" required><br>
+			<div ng-show="form.uEmail.$dirty && form.uEmail.$invalid">
+				Invalid: <br>
+				<span ng-show="form.uEmail.$error.required">Tell us your email.</span>
+				<span ng-show="form.uEmail.$error.email">this is not a valid email.</span>
+			</div>
+			<label>Gerder:</label>
+			<input type="radio" ng-model="user.gender" value="male">male
+			<input type="radio" ng-model="user.gender" value="female">female <br>
+			<input type="checkbox" type="text" name="userAgree" ng-model="user.agree" required>I agree:
+			<input type="text" ng-show="user.agree" ng-model="user.agreeSign" required>
+			<div ng-show='!user.agree || !user.agreeSign'>
+				Please agree and sign
+			</div>
+			<button ng-click="reset()" ng-disabled="isUnchanged(user)">RESET</button>
+			<button ng-click="update(user)" ng-disabled="form.$invalid || isUnchanged(user)">SAVE</button>
+		</form>
+	</div>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.controller('myCtrl',function($scope) {
+		$scope.uName="";
+		$scope.uEmail="";
+		$scope.user={
+			gender:"",
+			agreeSign:""
+		};
+		$scope.save = function() {
+			alert('保存数据')
+		}
+	});
+	</script>
+</body>
+</html>

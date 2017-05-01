@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength>动感超人 力量</superman>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength speed>动感超人 力量+敏捷</superman>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength speed light>动感超人 力量+敏捷+发光</superman>
+		</div>
+	</div>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.directive('superman',function(){
+		return {
+			scope:{},
+			restrict:'AE',
+			controller:function ($scope) {
+				//指令爆露一些方法
+				$scope.abilities = [];
+				this.addStrength = function() {
+					$scope.abilities.push('strength');
+				};
+				this.addSpeed = function() {
+					$scope.abilities.push('speed');
+				};
+				this.addLight = function() {
+					$scope.abilities.push('light');
+				}
+			},
+			link:function (scope,element,attrs) {
+				//处理指令内部事务，绑定事件，绑定数据
+				element.addClass('btn btn-primary');
+				element.bind('mouseenter',function() {
+					console.log(scope.abilities);
+				});
+			}
+		}
+	});
+	myDirective.directive('strength',function() {
+		return {
+			require:'^superman',//依赖于superman
+			link:function (scope,element,attrs,supermanCtrl) {
+				supermanCtrl.addStrength();
+			}
+		}
+	});
+	myDirective.directive('speed',function() {
+		return {
+			require:'^superman',
+			link:function (scope,element,attrs,supermanCtrl) {
+				supermanCtrl.addSpeed();
+			}
+		}
+	});
+	myDirective.directive('light',function() {
+		return {
+			require:'^superman',
+			link:function (scope,element,attrs,supermanCtrl) {
+				supermanCtrl.addLight();
+			}
+		}
+	})
+	</script>
+</body>
+</html>

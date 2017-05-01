@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<hello>
+		<p>这是指令内部的内容！！！</p>
+	</hello>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.directive('hello',function($templateCache){
+		return {
+			restrict:'AE',
+			transclude:true,
+			template:'<div>hello panda！<em ng-transclude></em></div>'
+		}
+	})
+	</script>
+</body>
+</html>

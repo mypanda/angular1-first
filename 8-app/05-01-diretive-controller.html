@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-controller='myCtl'>
+		<loader>滑动加载</loader>
+	</div>
+	<script>
+	var myDirective = angular.module('directive',[]);
+	myDirective.controller('myCtl',function($scope) {
+		$scope.loadData = function() {
+			console.log('数据加载中。。。')
+		}
+	});
+	myDirective.directive('loader',function($templateCache){
+		return {
+			restrict:'AE',
+			link:function(scope,element,attr) {
+				element.bind('mouseenter',function() {
+					//1调用
+					// scope.loadData();
+					//2嗲用
+					scope.$apply('loadData()');
+				})
+			}
+		}
+	})
+	</script>
+</body>
+</html>
