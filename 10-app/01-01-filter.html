@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="dateModule">
+  <head>
+    <meta charset="utf-8">
+    <title>filter</title>
+    <script src="js/angular.js" charset="utf-8"></script>
+  </head>
+  <body ng-controller="dateCtrl">
+    <p>{{1304375948024 | date}}</p>
+    <p>{{1304375948024 | date:"MM/dd/yyyy @ h:mma" }}</p>
+    <p>{{1304375948024 | date:"yyyy-MM-dd hh:mm:ss" }}</p>
+  </body>
+  <script type="text/javascript">
+    var dateModule = angular.module('dateModule',[]);
+    dateModule.controller('dateCtrl',function ($scope) {
+
+    })
+  </script>
+</html>

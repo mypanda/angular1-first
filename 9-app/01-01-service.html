@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="LoadDataCtrl">
+	  <ul>
+	    <li ng-repeat="user in users">
+        {{user.name}}
+      </li>
+	  </ul>
+	</div>
+	<script>
+	var myModule =  angular.module('myModule',[]);
+  myModule.controller('LoadDataCtrl',function ($scope,$http) {
+    $http({
+      method:'GET',
+      url:'data.json'
+    }).success(function (data,status,headers,config) {
+      console.log("success...");
+      console.log(data);
+      $scope.users = data;
+    }).error(function (data,status,headers,config) {
+      console.log('error...');
+    })
+  })
+	</script>
+</body>
+</html>

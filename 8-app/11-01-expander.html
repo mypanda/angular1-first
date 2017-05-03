@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="expanderModule">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+	<style media="screen">
+	.expander {
+		border: 1px solid black;
+		width: 250px;
+	}
+
+	.expander>.title {
+		background-color: black;
+		color: white;
+		padding: .1em .3em;
+		cursor: pointer;
+	}
+
+	.expander>.body {
+		padding: .1em .3em;
+	}
+	</style>
+</head>
+<body>
+	<div ng-controller="someController">
+		<expander class="expander" expander-title="title">
+			{{text}}
+		</expander>
+	</div>
+	<script>
+	var expanderModule = angular.module('expanderModule',[]);
+	expanderModule.directive('expander',function() {
+		return {
+			restrict:'EA',
+			replace:true,
+			transclude:true,
+			scope:{
+				title:'=expanderTitle'
+			},
+			template : '<div>'
+					 + '<div class="title" ng-click="toggle()">{{title}}</div>'
+					 + '<div class="body" ng-show="showMe" ng-transclude></div>'
+					 + '</div>',
+			link:function (scope,element,attrs) {
+				scope.showMe = false;
+				scope.toggle = function(){
+					scope.showMe = !scope.showMe;
+				}
+			}
+		}
+	});
+	expanderModule.controller('someController',function($scope){
+		$scope.title = "点击展开";
+		$scope.text = '这是内部内容.';
+	})
+	</script>
+</body>
+</html>

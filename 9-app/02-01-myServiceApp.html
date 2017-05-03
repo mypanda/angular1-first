@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<script src="js/AngularJS.v1.3.0-beta.14.min.js"></script>
+</head>
+<body>
+	<h3>不显示我也不知道怎么了，下次看一下吧,版本的问题</h3>
+	<div ng-controller="ServiceController">
+        <label>用户名</label>
+        <input type="text" ng-model="username" placeholder="请输入用户名" />
+        <pre ng-show="username">{{users}}</pre>
+    </div>
+	<script>
+	var myModule =  angular.module('myModule',[]);
+	myModule.factory('userListService',['$http',function ($http) {
+		var doRequest = function (username,path) {
+			return $http({
+				method:'GET',
+				url:'users.json'
+			})
+		}
+		return {
+			userList:function (username) {
+				return doRequest(username,'userList')
+			}
+		};
+	}])
+  myModule.controller('ServiceController',function ($scope,$timeout,userListService) {
+    var timeout;
+		$scope.$watch('username',function (newUserName) {
+			if (newUserName) {
+				if(timeout){
+					$timeout.cancel(timeout);
+				}
+				timeout = $timeout(function() {
+					userListService.userList(newUserName)
+						.success(function (data,status) {
+							$scope.users = data;
+					});
+				},350)
+			}
+		})
+  })
+	</script>
+</body>
+</html>

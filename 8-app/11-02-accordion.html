@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="expanderModule">
+<head>
+	<meta charset="UTF-8">
+	<title>hello 指令</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
+	<script src="js/angular.js"></script>
+	<style media="screen">
+	.expander {
+		border: 1px solid black;
+		width: 250px;
+	}
+
+	.expander>.title {
+		background-color: black;
+		color: white;
+		padding: .1em .3em;
+		cursor: pointer;
+	}
+
+	.expander>.body {
+		padding: .1em .3em;
+	}
+	</style>
+</head>
+<body ng-controller="someController">
+		<accordion>
+			<expander class="expander" ng-repeat='expander in expanders' expander-title="expander.title">
+				{{expander.text}}
+			</expander>
+		</accordion>
+	<script>
+	var expanderModule = angular.module('expanderModule',[]);
+	expanderModule.directive('accordion',function() {
+		return {
+			restrict:'EA',
+			replace:true,
+			transclude:true,
+			template:'<div ng-transclude></div>',
+			controller:function () {
+				var expanders = [];
+				this.getOpened = function (selectedExpander) {
+					angular.forEach(expanders,function (expander) {
+						if(selectedExpander != expander){
+							expander.showMe = false;
+						}
+					})
+				}
+				this.addExpander = function (expander) {
+					expanders.push(expander);
+				}
+			}
+		}
+	});
+	expanderModule.directive('expander',function() {
+		return {
+			restrict:'EA',
+			replace:true,
+			transclude:true,
+			require:'^?accordion',
+			scope:{
+				title:'=expanderTitle'
+			},
+			template : '<div>'
+					 + '<div class="title" ng-click="toggle()">{{title}}</div>'
+					 + '<div class="body" ng-show="showMe" ng-transclude></div>'
+					 + '</div>',
+			link:function (scope,element,attrs,accordionController) {
+				scope.showMe = false;
+				accordionController.addExpander(scope);
+				scope.toggle = function(){
+					scope.showMe = !scope.showMe;
+					accordionController.getOpened(scope);
+				}
+			}
+		}
+	});
+	expanderModule.controller('someController',function($scope){
+		$scope.expanders =[{
+			title:'click me to expand',
+			text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do'
+		},{
+			title:'click',
+			text:'sit amet, consectetur adipisicing elit, sed do'
+		},{
+			title:'me to expand',
+			text:'Lorem adipisicing elit, sed do'
+		}];
+	})
+	</script>
+</body>
+</html>

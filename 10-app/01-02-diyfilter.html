@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="dateModule">
+  <head>
+    <meta charset="utf-8">
+    <title>filter</title>
+    <script src="js/angular.js" charset="utf-8"></script>
+  </head>
+  <body>
+    {{'熊猫' | filter1 }}
+  </body>
+  <script>
+    var dateModule = angular.module('dateModule',[]);
+    dateModule.filter('filter1',function () {
+      return function (item) {
+        return item + ' O(n_n)O'
+      }
+    })
+  </script>
+</html>

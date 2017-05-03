@@ -553,9 +553,115 @@ ng-valid、ng-invalid、ng-pristine、ng-dirty
 
 div模拟输入
 
-10-01-
+10-01-div.html
+
+
+expander指令
+11-01-expander
+
+sccordion指令
+11-02-accordion
+
+第三方指令库
+http://angular-ui.github.io
+
+
+***************
+ERP类型的系统必备UI组件 共36个 http://miniui.com
+
+表单，布局，导航，列表
+
+重要的UI组件
+Form
+DataPicker
+FileUpload
+Tree
+DataGrid
+----------------
+http://sencha.com
+
+Ext JS 4.1 Samples
+
+***************
+******************
+总结:互联网、电商类型必备UI组件
+
+http://gallery.kissyui.com/coms
+
+*******************
+
+
+Directive思想的起源
+
+HTML Components
+componentizing web applications
+
+http://www.w3.org/TR/NOTE-HTMLComponents
 ```
 ##### 2.5 Service
+
+不要试图复用controller,两个controller相同，或者多个controller一样的时候，要凑成一个服务
+
+* 使用$http服务
+* 创建自己的service
+* service的特性
+* service、factory、provider本质上都是provider
+* 使用$filter服务
+* 其他内置的service介绍
+
+
+service的特性
+* service都是单例的
+* service有$iniector负责实例化
+* service在整个应用的生命周期中存在，可以用来共享数据
+* 在需要使用的地方利用依赖注入机制注入service
+* 自定义的service需要卸载卑职的service 的后面
+* 内置的service的命名以$符号开头，自定义的service应该避免
+
+
+#### service provider factory本质都是provider
+
+```
+function provider(name,provider_){
+	if(isFunction(provider_)){
+		provider_ = providerInjector.instantiate(provider_)；
+	}
+	if(!provider_.$get){
+		throw Error('provider ' + name + ' must define $get factory ')
+	}
+	return providerCache[name + providersuffix] = provider_;
+}
+
+service provider factory本质都是provider
+
+provider模式是'策略模式'+'抽象工程模式'的混合体
+```
+
+```
+使用$filter服务
+
+* $filter是用来进行数据格式化的专用服务
+* AngularJS内置了9个filter
+currency data filter json limitTo lowercase number orderBy uppercase
+* filter可以嵌套使用(用管道符号| 分隔)
+* filter是可以传递参数的
+* 用户可以自己定义自己的filter
+
+
+其他常用service：内置了共24个
+
+$compild 编译服务
+$filter 格式化数据
+$initerval
+$timeout
+$locale
+$location
+$log
+$parse
+$http 封装Ajax
+
+http://www.ngnice.com/docs/api/ng/
+```
 ##### 2.6 Provider
 ##### 2.7 表单
 ##### 2.8 综合实力BookStore
@@ -584,5 +690,3 @@ div模拟输入
 #### 自己写的代码是v1.3.0最终的版本要区别对待,
 #### 不支持IE8
 #### 23种设计模式
-
-http://www.imooc.com/video/3096 05:59
